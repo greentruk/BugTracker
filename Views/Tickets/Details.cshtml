@@ -1,0 +1,201 @@
+﻿@model BugTracker.Models.Ticket
+
+@{
+    ViewBag.Title = "Details";
+}
+
+<h2>Ticket Details</h2>
+<div>
+    @Html.ActionLink("Edit Ticket", "Edit", new { id = Model.Id }, new { @class = "btn btn-success" })
+    @Html.ActionLink("Ticket History", "Index", "Histories", new { id = Model.Id }, new { @class = "btn btn-success" })
+</div>
+
+
+<div>
+
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.Assignee)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Assignee.FirstName)
+            @Html.DisplayFor(model => model.Assignee.LastName)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Author)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Author.FirstName)
+            @Html.DisplayFor(model => model.Author.LastName)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Priority)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Priority.Name)
+        </dd>
+
+        <dt>
+            Project Title
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Project.Title)
+        </dd>
+
+        <dt>
+            Ticket Description
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Description)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Type)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Type.Name)
+        </dd>
+
+        <dt>
+            Created Date
+            @*@Html.DisplayNameFor(model => model.Created)*@
+        </dt>
+
+        <dd>
+            @{
+                var localTime1 = Model.Created.ToString("G");
+
+            }
+            @Html.Raw(localTime1)
+
+        </dd>
+
+        <dt>
+            Updated Date
+        </dt>
+
+        <dd>
+            @{
+                var localTime2 = Model.Updated.ToString("G");
+
+            }
+            @Html.Raw(localTime2)
+
+        </dd>
+
+        <dt>
+            Status
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Status.Name)
+        </dd>
+
+    </dl>
+</div>
+
+@******************LIST OF ATTACHMENTS AND ATTACHMENT BUTTON *****************************************************@
+<div class="Container h2">
+    <div class="col-lg-12">
+        <div class="row h5">
+            <div class="col-md-6">
+                <h3>Attachments</h3>
+                <p>
+                    @Html.ActionLink("Attach a File", "Create", "TicketAttachments", new { id = Model.Id }, new { @class = "btn btn-success" })
+
+                </p>
+                <div>
+                    @foreach (var a in Model.Attachments)
+                    {
+                        <a href="@a.FilePath">@a.Description</a>
+                        <p>Attached by @a.AuthorID</p>
+                        <div>
+                            @Html.ActionLink("Edit", "Edit", "TicketAttachments", new { id = a.Id }, null) |
+                            @Html.ActionLink("Delete", "Delete", "TicketAttachments", new { id = a.Id }, null)
+                        </div>
+                        <hr />
+                    }
+                </div>
+            </div>
+            @*******************************************************************************************************************@
+            @******************LIST OF COMMENTS AND COMMENT BUTTON *****************************************************@
+            <div class="col-md-6">
+                <h3>Comments</h3>
+                @Html.ActionLink("Leave a Comment", "Create", "Comments", new { id = Model.Id }, new { @class = "btn btn-success" })
+
+                @*<div>
+                        @foreach (var r in Model.Comments)
+                        {
+                            <div>
+                                <p>@r.Body</p>
+                            </div>
+                        }
+                    </div>*@
+
+
+                @***********************************************************************************************************@
+
+
+                @foreach (var com in Model.Comments)
+                {
+                    <dl class="dl-horizontal">
+                        <dt>
+                            Comment
+                        </dt>
+                        <dd>
+                            @com.Body
+                        </dd>
+                        <dt>
+                            Comment Date
+                        </dt>
+                        <dd>
+                            @com.Created.ToString("d")
+                        </dd>
+                        <dt>
+                            Author:
+                        </dt>
+                        <dd>
+                            @com.AuthorID
+                        </dd>
+
+                    </dl>
+                    <div>
+                        @Html.ActionLink("Edit", "Edit", "Comments", new { id = com.Id }, null) |
+                        @Html.ActionLink("Delete", "Delete", "Comments", new { id = com.Id }, null)
+                    </div>
+                            <hr />
+                }
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="Container h2">
+    <div class="col-lg-12">
+        <div class="row h5">
+            <div class="col-md-12">
+
+                <p>
+                    <hr />
+                    @Html.ActionLink("Back to Ticket List", "Index", new { id = Model.Id }, new { @class = "btn btn-success" })
+
+                </p>
+
+
+            </div>
+        </div>
+    </div>
+</div>
+<hr />
+
+
+

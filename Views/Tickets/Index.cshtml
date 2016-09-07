@@ -1,0 +1,101 @@
+﻿@model IEnumerable<BugTracker.Models.Ticket>
+
+@{
+    ViewBag.Title = "Index";
+}
+
+<h2>Tickets</h2>
+
+<p>
+    @if (User.IsInRole("Submitter"))
+    {
+        @Html.ActionLink("Create New Ticket", "Create", "Tickets", null, new { @class = "btn btn-success" })
+    }
+</p>
+<table class="table table-striped" id="ticketIndexTable">
+    <thead>
+        <tr>
+            <th>
+                Created Date
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Assignee)
+            </th>
+            <th>
+                Author
+            </th>
+            <th>
+                Priority
+            </th>
+            <th>
+                Project Title
+            </th>
+            <th>
+                Type
+            </th>
+           
+            <th>
+                Updated Date
+            </th>
+            <th>
+                Status
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>
+                    @{
+                        var localTime1 = item.Created.ToString("G");
+
+                    }
+                    @Html.Raw(localTime1)
+
+                </td>
+                <td>
+               
+                    @Html.DisplayFor(modelItem => item.Assignee.FirstName)
+                    @Html.DisplayFor(modelItem => item.Assignee.LastName)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Author.FirstName)
+                    @Html.DisplayFor(modelItem => item.Author.LastName)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Priority.Name)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Project.Title)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Type.Name)
+                </td>
+                
+                <td>
+                    @{
+                        var localTime2 = item.Updated.ToString("G");
+
+                    }
+                    @Html.Raw(localTime2)
+                </td>
+                <td>
+                
+                    @Html.DisplayFor(modelItem => item.Status.Name)
+                </td>
+                <td>
+                    @Html.ActionLink("Edit", "Edit", new { id = item.Id }) |
+                    @Html.ActionLink("Details", "Details", new { id = item.Id }) |
+                   
+                    @if (User.IsInRole("Admin"))
+                    {
+                     @Html.ActionLink("Delete", "Delete", new { id = item.Id })
+                    }
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>

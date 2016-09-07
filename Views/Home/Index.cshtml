@@ -1,0 +1,89 @@
+﻿@using BugTracker.Models
+@model LoginViewModel
+
+
+@{
+    ViewBag.Title = "Home Page";
+}
+
+<div class="jumbotron">
+    <h1><span style="color:#008d4c"><strong>Bug</strong>Tracker</span></h1>
+    <p class="lead">Bug Tracker is an internal workflow application designed to manage a companies hardware, software and network challanges based on a ticket system.
+    This application was developed using the Model-View-Controller (MVC) pattern, which renders stored data specific to 
+    the user's actions within the application. Developer tools include Microsoft Visual Studio 2015, ASP.NET, C#, Linq, SQL, BootStrap, Javascript, and CSS.  </p>
+    <br/>
+    
+</div>
+
+
+<div class="row">
+    <div class="col-md-offset-4">
+        <h1>Application User Roles</h1>
+        </div>
+    </br>
+    </div>
+    <div class="row">
+        <div class="col-md-3">
+            <h2>Submitter</h2>
+            <p>
+                A Submitter is permitted to create a new ticket and view a list of all tickets they own.  Whenever there has been a change to a ticket, the Submitter receives
+                an email informing them that there has been a change to the ticket by another user.
+            </p>
+            <div>
+                @using (Html.BeginForm("Login", "Account", new { ReturnUrl = ViewBag.ReturnUrl }, FormMethod.Post, new { @class = "form-horizontal", role = "form" }))
+                {
+                    @Html.AntiForgeryToken()
+                    @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+                    <input type="hidden" name="Email" value="submitter@submitter.com" />
+                    <input type="hidden" name="Password" value="Coder@207" />
+                    <input type="submit" value="View as Submitter" class="btn btn-success" />
+                }
+
+            </div>
+        </div>
+
+        <div class="col-md-3">
+            <h2>Developer</h2>
+            <p>Developers can view all tickets that have been assigned to them by either the Project Manager or Admin.  The developers are notified by emailed when they are assigned a new ticket.</p>
+            <div>
+                @using (Html.BeginForm("Login", "Account", new { ReturnUrl = ViewBag.ReturnUrl }, FormMethod.Post, new { @class = "form-horizontal", role = "form" }))
+            {
+                    @Html.AntiForgeryToken()
+                    @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+                    <input type="hidden" name="Email" value="developer@developer.com" />
+                    <input type="hidden" name="Password" value="Coder@207" />
+                    <input type="submit" value="View as Developer" class="btn btn-success" />
+                }
+            </div>
+        </div>
+        <div class="col-md-3">
+            <h2>Project Manager</h2>
+            <p>Project Managers can see all tickets belonging to the projects they are associated with.</p>
+            @using (Html.BeginForm("Login", "Account", new { ReturnUrl = ViewBag.ReturnUrl }, FormMethod.Post, new { @class = "form-horizontal", role = "form" }))
+            {
+                @Html.AntiForgeryToken()
+                @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+                <input type="hidden" name="Email" value="pm@pm.com" />
+                <input type="hidden" name="Password" value="Coder@207" />
+                <input type="hidden" name="FirstName" value="Project" />
+                <input type="hidden" name="LastName" value="Manager" />
+                <input type="submit" value="View as Project Manager" class="btn btn-success" />
+            }
+
+        </div>
+        <div class="col-md-3">
+            <h2>Admin</h2>
+            <p>The Admin has access to the entire functionality of the application .</p>
+            @using (Html.BeginForm("Login", "Account", new { ReturnUrl = ViewBag.ReturnUrl }, FormMethod.Post, new { @class = "form-horizontal", role = "form" }))
+            {
+                @Html.AntiForgeryToken()
+                @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+                <input type="hidden" name="Email" value="admin@admin.com" />
+                <input type="hidden" name="Password" value="Coder@207" />
+                <input type="hidden" name="FirstName" value="Admin" />
+                <input type="hidden" name="LastName" value="Admin" />
+                <input type="submit" value="View as Admin" class="btn btn-success" />
+            }
+
+        </div>
+    </div>

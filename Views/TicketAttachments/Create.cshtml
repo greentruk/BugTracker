@@ -1,0 +1,45 @@
+﻿@model BugTracker.Models.Attachment
+
+@{
+    ViewBag.Title = "Create";
+}
+
+<h2>Add Attachment</h2>
+<p>Accepted file types: .png, .jpg, .jpeg, .gif, .bmp, .doc, .docx, .txt, .pdf</p>
+@using (Html.BeginForm("Create", "TicketAttachments", FormMethod.Post, new { enctype = "Multipart/form-data" }))
+{
+    @Html.AntiForgeryToken()
+    <input type="hidden" value="@ViewBag.AuthorID" name="AuthorID" />
+    <input type="hidden" value="@ViewBag.TicketId" name="TicketId" />
+
+    <div class="form-horizontal">
+        
+
+        @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+        <div class="form-group">
+            @Html.LabelFor(model => model.Description, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.Description, new { htmlAttributes = new { @class = "form-control", required="Required" } })
+                @Html.ValidationMessageFor(model => model.Description, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.FilePath, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                <input name="FileUpload" type="file" class="form-control" id="fileUpload" />
+                @Html.ValidationMessageFor(model => model.FilePath, "", new { @class = "text-danger" })
+            </div>
+        </div>
+        
+        <div class="form-group">
+            <div class="col-md-offset-2 col-md-10">
+               <input type="submit" value="Add Attachment" class="btn btn-success" />
+            </div>
+        </div>
+    </div>
+}
+
+<div>
+    @Html.ActionLink("Back to Ticket Detail", "Details", "Tickets", new { id = @ViewBag.TicketId }, null)
+</div>

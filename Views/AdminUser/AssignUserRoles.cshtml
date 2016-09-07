@@ -1,0 +1,41 @@
+﻿@model BugTracker.Models.AdminUserViewModel
+@{
+    ViewBag.Title = "Edit User Roles";
+}
+
+<h2>Assign User Roles</h2>
+
+<table class="table table-striped">
+        <tr>
+            <td>
+                <h3>Add Roles</h3>
+                 @using (Html.BeginForm("AddRole", "AdminUser"))
+                {
+                      @Html.AntiForgeryToken()
+                      @Html.ValidationSummary(true, "", new { @class = "text-danger"})
+                      @Html.ListBox("SelectedAbsentRoles", Model.AbsentRoles)
+                    <input type="hidden" value="@Model.User.Id" name="AddId" />
+                    <br/>
+                    <input type="submit" class="btn btn-primary" value="AddRole" name="AddRole" />
+                 }
+                
+            </td>
+            <td>
+                <h3>Remove Roles</h3>
+                @using (Html.BeginForm("RemoveRole", "AdminUser"))
+                {
+                    @Html.AntiForgeryToken()
+                    @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+                    @Html.ListBox("SelectedCurrentRoles", Model.Roles)
+                    <input type="hidden" value="@Model.User.Id" name="RemoveId" />
+                    <br />
+                    <input type="submit" class="btn btn-primary" value="Remove Role" name="RemoveRole" />
+                }
+
+
+</td>
+
+        </tr>
+   
+</table>
+

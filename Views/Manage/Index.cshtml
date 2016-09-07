@@ -1,0 +1,30 @@
+﻿@model BugTracker.Models.IndexViewModel
+@{
+    ViewBag.Title = "Manage";
+}
+
+<h3>Change your account settings</h3>
+
+<p class="text-success">@ViewBag.StatusMessage</p>
+<div>
+    @*<h4>Change your account settings</h4>*@
+    <hr />
+    <dl class="dl-horizontal">
+        @*<dt>Password:</dt>*@
+        <dd>
+            
+            @if (Model.HasPassword)
+            {
+                @Html.ActionLink("Change your password", "ChangePassword", "Manage",null, new { @class = "btn btn-success" })
+     
+            }
+            else
+            {
+                @Html.ActionLink("Create", "SetPassword")
+            }
+            
+        </dd>
+ 
+       
+    </dl>
+</div>
