@@ -89,14 +89,16 @@ namespace BugTracker.Controllers
         // POST: Comments/Edit/5
         [HttpPost]
         //[ValidateAntiForgeryToken]
-        public ActionResult Edit([Bind(Include = "Id,Body,Created,TicketId,UserId")] Comment comment)
+        public ActionResult Edit([Bind(Include = "Id,Body,Created,TicketId,UserId,AuthorID")] Comment comment)
         {
             if (ModelState.IsValid)
             {
                 var ticket = db.Tickets.Find(comment.TicketId);
                 db.Entry(comment).State = EntityState.Modified;
                 db.SaveChanges();
-                return RedirectToAction("Details", "Tickets", new { id = ticket.Id });
+                return RedirectToAction("Details", "Tickets", new { id = comment.TicketId });
+
+                //return RedirectToAction("Details", "Tickets", new { id = ticket.Id });
             }
             ViewBag.TicketId = new SelectList(db.Tickets, "Id", "Title", comment.TicketId);
             return View(comment);

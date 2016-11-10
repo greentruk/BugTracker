@@ -8,24 +8,23 @@
 @using (Html.BeginForm("ChangeDisplayName", "Manage", FormMethod.Post, new { @class = "form-horizontal", role = "form" }))
 {
     @Html.AntiForgeryToken()
-    <h4>Change Display Name Form</h4>
     <hr />
     @Html.ValidationSummary("", new { @class = "text-danger" })
     <div class="form-group">
-        @Html.LabelFor(m => m.OldDisplayName, new { @class = "col-md-2 control-label" })
-        <div class="col-md-10">
+        @Html.Label("Current Display Name", new { @class = "col-md-3 control-label" })
+        <div class="col-md-8">
             @Html.PasswordFor(m => m.OldDisplayName, new { @class = "form-control" })
         </div>
     </div>
     <div class="form-group">
-        @Html.LabelFor(m => m.NewDisplayName, new { @class = "col-md-2 control-label" })
-        <div class="col-md-10">
+        @Html.Label("New Display Name", new { @class = "col-md-3 control-label" })
+        <div class="col-md-8">
             @Html.PasswordFor(m => m.NewDisplayName, new { @class = "form-control" })
         </div>
     </div>
     <div class="form-group">
-        @Html.LabelFor(m => m.ConfirmDisplayName, new { @class = "col-md-2 control-label" })
-        <div class="col-md-10">
+        @Html.Label("Confirm New Display Name", new { @class = "col-md-3 control-label" })
+        <div class="col-md-8">
             @Html.PasswordFor(m => m.ConfirmDisplayName, new { @class = "form-control" })
         </div>
     </div>

@@ -107,7 +107,7 @@ namespace BugTracker.Controllers
         // POST: TicketAttachment/Edit/5
         [HttpPost]
         //[ValidateAntiForgeryToken]
-        public ActionResult Edit([Bind(Include = "Id,TicketId,FilePath,Description,Created,UserId")] Attachment ticketAttachment)
+        public ActionResult Edit([Bind(Include = "Id,TicketId,FilePath,Description,Created,UserId,AuthorID")] Attachment ticketAttachment)
         {
             if (ModelState.IsValid)
             {
