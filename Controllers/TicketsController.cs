@@ -181,12 +181,7 @@ namespace BugTracker.Models
 
             ViewBag.AssigneeId = new SelectList(rolesHelper.UsersInRole("Developer"), "Id", "DisplayName", ticket.AssigneeId);
             ViewBag.ProjectId = new SelectList(helper.AssignedProjects(user.Id), "Id", "Title", ticket.ProjectId);
-
-            //ViewBag.AssigneeId = new SelectList(db.Users, "Id", "FirstName", ticket.AssigneeId);
-            //ViewBag.AuthorId = new SelectList(db.Users, "Id", "FirstName", ticket.AuthorId);
-            //ViewBag.AuthorId = user.FirstName;
             ViewBag.PriorityId = new SelectList(db.Priorities, "Id", "Name", ticket.PriorityId);
-            //ViewBag.ProjectId = new SelectList(db.Projects, "Id", "Title", ticket.ProjectId);
             ViewBag.TypeId = new SelectList(db.Types, "Id", "Name", ticket.TypeId);
             ViewBag.StatusId = new SelectList(db.Status, "Id", "Name", ticket.StatusId);
 

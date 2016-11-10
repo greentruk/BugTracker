@@ -29,12 +29,7 @@ namespace BugTracker.Controllers
             if (userRoles.Contains("ProjectManager") || (userRoles.Contains("Developer")) || (userRoles.Contains("Submitter")))
             {
                 return View(user.Projects.ToList());
-                //if (userRoles.Contains("ProjectManager"))
-                //{
-                //    return View(db.Projects.Where(t => t.AssigneeId == user.Id).ToList());
-
-                //}
-                //return View("Index", "Tickets");
+             
             }
             return View(db.Projects.ToList());
         }
